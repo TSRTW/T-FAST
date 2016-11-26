@@ -1,8 +1,8 @@
 package tw.tsr.tfast
 
 import tw.tsr.command.CommandReader;
-import tw.tsr.utils.MainLogger;
-import tw.tsr.utils.ServerKiller;
+import tw.tsr.logger.MainLogger;
+import tw.tsr.killer.ServerKiller;
 
 /**
  *
@@ -12,9 +12,9 @@ import tw.tsr.utils.ServerKiller;
  *
  *
  *
- *
- *
- *
+ * This is a new Server Core written by TSR.TW. Mostly code from TSRlightda.
+ * Welcome to help us to finish this Server Core.
+ * This will be the next stand just like DragonProxy,that PC and PE can join the same server!!
  **/
 
 /**
@@ -37,7 +37,7 @@ public class TFast {
   
   public final static String PATH = System.getProperty("user.dir") + "/";
     public final static String DATA_PATH = System.getProperty("user.dir") + "/";
-      public final static String PLUGIN_PATH = DATA_PATH + "plugins";
+      public final static String PLUGIN_PATH = DATA_PATH + "Plugins";
         public static final long START_TIME = System.currentTimeMillis();
           public static boolean ANSI = true;
             public static boolean shortTitle = false;
