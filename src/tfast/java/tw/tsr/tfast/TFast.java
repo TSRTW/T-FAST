@@ -45,3 +45,64 @@ public class TFast {
             public static boolean shortTitle = false;
               public static int DEBUG = 1;
   
+
+public static void main(String[] args) {
+
+    //Shorter title for windows 8/2012
+    String osName = System.getProperty("os.name").toLowerCase();
+      if (osName.contains("windows")) {
+        if (osName.contains("windows 8") || osName.contains("2012")) {
+          shortTitle = true;
+            }
+        }
+
+        //Start ANSI
+        for (String arg : args) {
+          switch (arg) {
+            case "disable-ansi":
+              ANSI = false;
+                break;
+            }
+        }
+
+        MainLogger logger = new MainLogger(DATA_PATH + "server.log");
+
+        try {
+            if (ANSI) {
+                System.out.print((char) 0x1b + "]0;Starting Nukkit Server For Minecraft: PE" + (char) 0x07);
+            }
+            Server server = new Server(logger, PATH, DATA_PATH, PLUGIN_PATH);
+        } catch (Exception e) {
+            logger.logException(e);
+        }
+
+        if (ANSI) {
+            System.out.print((char) 0x1b + "]0;Stopping the Server..." + (char) 0x07);
+        }
+        logger.info("Stopping other threads");
+
+        for (Thread thread : java.lang.Thread.getAllStackTraces().keySet()) {
+            if (!(thread instanceof InterruptibleThread)) {
+                continue;
+            }
+            logger.debug("Stopping " + thread.getClass().getSimpleName() + " thread");
+            if (thread.isAlive()) {
+                thread.interrupt();
+            }
+        }
+
+        ServerKiller killer = new ServerKiller(8);
+          killer.start();
+
+            logger.shutdown();
+              logger.interrupt();
+                CommandReader.getInstance().removePromptLine();
+
+        if (ANSI) {
+            System.out.print((char) 0x1b + "]0;Server was Stopped" + (char) 0x07);
+        }
+        System.exit(0);
+    }
+
+
+}
