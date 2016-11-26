@@ -10,7 +10,7 @@
  *
  * 
  */
-package tw.tsr.tfast.protocol.binarypacket;
+package tw.tsr.tfast.protocol.packet;
 
 import lombok.Getter;
 import lombok.Setter;
